@@ -1,6 +1,8 @@
 package com.ccnu.dang.pojo;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,14 +32,15 @@ public class Category {
 	@Column(name="cn_name")
 	private String cnName;    //中文名字
 	private String description;   //种类描述(*) 
+	@Column(name="parent_id")
+	private Integer parentId;	
 	
 	// 定义该Person实体所有关联的Address实体，没有指定cascade属性
 	@OneToMany(targetEntity=Category.class)
 	// 映射外键列，此处映射的外键列将会添加到关联实体对应的数据表中
-	@JoinColumn(name="parentId" , referencedColumnName="category_id")	
-	private Set<Category> childcategories = new HashSet<>();	
+	@JoinColumn(name="parent_id" , referencedColumnName="category_id")	
+	private List<Category> childcategories = new ArrayList<>();	
 	
-	private Integer parentId;	
 
 	// 定义该Category实体所有关联的Product实体
 	@ManyToMany(targetEntity=Product.class)
@@ -131,19 +134,19 @@ public class Category {
 		this.products = products;
 	}
 	
-	public Set<Category> getChildcategories() {
+	public List<Category> getChildcategories() {
 		return childcategories;
 	}
 
 
-	public void setChildcategories(Set<Category> childcategories) {
+	public void setChildcategories(List<Category> childcategories) {
 		this.childcategories = childcategories;
 	}
 
 	@Override
 	public String toString() {
-		return "Category [" + "parentId=" + parentId + ", categoryId=" + categoryId + ", turn=" + turn
-				+ ", enName=" + enName + ", cnName=" + cnName
+		return "Category [" + "cnName=" + cnName + ", parentId=" + parentId + ", categoryId=" + categoryId + 
+				", turn=" + turn + ", enName=" + enName + ", cnName=" + cnName
 				+ ", description=" + description +  "]";
 	}
 	

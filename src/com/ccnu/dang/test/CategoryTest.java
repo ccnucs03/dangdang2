@@ -67,10 +67,15 @@ public class CategoryTest {
 		
 		Query query = session.createQuery("from Category as cg where cg.categoryId=1");
 		Category category = (Category)query.list().get(0);
+		List<Category> firstList = category.getChildcategories();
 		
-		List<Category> list = new ArrayList<Category>(category.getChildcategories());
-		for(Category cg : list) {
-			System.out.println(cg.toString());
+		for(Category cg : firstList) {       //cg是 一级菜单(firstList)中的一个
+			System.out.println("一级菜单: " + cg.toString());
+			List<Category> secendList = cg.getChildcategories();   
+			for(Category e : secendList) {    //e是二级菜单(secendList)中的一个
+				System.out.println("----- 二级菜单: "+ e.toString());
+			}
+			
 		}
 		
 		//tx.commit();
