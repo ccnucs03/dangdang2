@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="user" namespace="/user" extends="struts-default">
+		<!-- 注册 -->
+		<action name="register" class="com.ccnu.dang.action.user.UserRegisterAction">
+			<result name="success">/user/verify_form.jsp</result>
+		</action>
+		<!-- 验证码图片 -->
+		<action name="checkcode" class="com.ccnu.dang.action.user.CodeAction">
+			<result type="stream" name="success">
+				<param name="inputName">inputStream</param>
+				<param name="contentType">image/jpeg</param>
+			</result>
+		</action>
+	
+	</package>
+</struts>

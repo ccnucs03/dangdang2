@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<package name="main" namespace="/main" extends="struts-default">
+		<!-- 添加新书 -->
+		<action name="AddBookAction" class="com.ccnu.dang.action.main.AddBookAction" >
+		 
+			<interceptor-ref name="defaultStack" />
+			<interceptor-ref name="fileUpload">    <!-- 控制上传文件的类型，主要是几种常见的图片格式 -->
+				<param name="allowedTypes">
+					image/bmp,image/png,image/gif,image/jpg
+				</param>
+				<param name="maximumSize">40480</param>
+			</interceptor-ref>
+			
+			<result name="success" type="redirect">
+				/main/book_list.jsp
+			</result>			
+		</action>	
+	</package>
+</struts>
